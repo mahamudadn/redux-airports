@@ -3,12 +3,43 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App/App';
 
 /** TODO: import REDUX **/
-
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import logger from 'redux-logger';
 
 /** TODO: Add REDUCERS */
 
+const count = (state = 0, action) => {
+    console.log('Heyyyy I am a reducer!!!! ;)');
+
+    if (action.type === 'INCREASE') {
+      // the next value of store.count 
+      // will be one more than its previous value
+        return state + 1;
+    } else if (action.type === 'DECREASE') {
+      // the next value of store.count
+      // will be one less than its previous value
+        return state - 1;
+    }
+    // if action.type is anything other than INCREASE
+    // then just return the last value of state
+    return state;
+}
 
 /** TODO: Create store */
+
+const storeInstance = createStore(
+    combineReducers(
+        {
+        count, // name of reducer
+       
+        }
+    ),
+    // tell Redux we want to use our new logger
+    applyMiddleware(
+        logger
+    )
+);
 
 
 
@@ -16,6 +47,8 @@ import App from './components/App/App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
+        <Provider store={storeInstance}>
         <App />
+        </Provider>
     </React.StrictMode>
 );
