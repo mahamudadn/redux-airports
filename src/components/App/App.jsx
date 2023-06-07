@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import AirLineForm from '../AirLineForm/AirLineForm';
+import AirlineList from '../AirlineList/AirlineList';
+
 
 function App() {
 
@@ -12,15 +15,14 @@ function App() {
   const dispatch = useDispatch();
   return (
     <div>
-      <h1>Redux Airport</h1>
-      <input placeholder='Airline Name' />
-      <button>Add Airline</button>
-
+      <AirLineForm/>
       <pre>{JSON.stringify(reduxStore)}</pre>
       <button onClick={() => dispatch({type:'INCREASE'})}>Increase</button>
       <button onClick={() => dispatch({type:'DECREASE'})}>Increase</button>
-      <p>{count}</p>
+      <button onClick={() => dispatch({type:'ADD_ARILINE',payload:'Delta'})}>DELTA</button>
+      <p>{reduxStore.count}</p>
     <p>reduxStore.count is {reduxStore.count}</p>
+    <AirlineList/>
       <table>{/* Airlines should be listed here */}</table>
     </div>
   );

@@ -26,13 +26,29 @@ const count = (state = 0, action) => {
     return state;
 }
 
+
+
+const airlineList =(state = [], action) => {
+    console.log('Airline List');
+    if(action.type === 'ADD_ARILINE') {
+        console.log(`action.payload is ${action.payload}`);
+
+        return [...state, action.payload]
+    }
+    return state;
+}
+
+
+
+
 /** TODO: Create store */
 
 const storeInstance = createStore(
     combineReducers(
         {
         count, // name of reducer
-       
+        airlineList
+    
         }
     ),
     // tell Redux we want to use our new logger
